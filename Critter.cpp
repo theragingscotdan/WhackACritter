@@ -14,6 +14,7 @@ Critter::Critter()
 	, m_alive(true)
 	, m_deathSound()
 	, m_deathBuffer()
+	, m_pendingScore(0)
 	
 {
 	// set up the sprite
@@ -53,7 +54,20 @@ void Critter::Input(sf::Event _gameEvent)
 
 				//play the death sound
 				m_deathSound.play();
+
+				// add to pending score
+				m_pendingScore += 1;
 			}
 		}
 	}
+}
+
+int Critter::GetPendingScore()
+{
+	return m_pendingScore;
+}
+
+void Critter::ClearPendingScore()
+{
+	m_pendingScore = 0;
 }

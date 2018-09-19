@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cstdlib>  // gives access to library func
 #include <ctime>    // gives access to time func
+#include <string>   // gives access to string funcs
 
 
 #include "Critter.h"  // project includes
@@ -24,6 +25,18 @@ int main()
 	// create an instance of our Critter class
 	Critter victim;
 
+	// game font
+	sf::Font gameFont;
+	gameFont.loadFromFile("fonts/mainFont.ttf");
+
+	// score tracking
+	int score = 0;
+	sf::Text scoreText;
+	scoreText.setFont(gameFont);
+	scoreText.setString("Score: " + std::to_string(score));
+	scoreText.setCharacterSize(25);
+	scoreText.setFillColor(sf::Color::Cyan);
+	scoreText.setPosition(50, 50);
 
 	// ----- game setup end ----------------
 	
@@ -49,7 +62,10 @@ int main()
 	
 		// ------------ update ---------------
 
-
+		sf::Time fameTime = gameClock.restart();
+		score += victim.GetPendingScore();
+		victim.ClearPendingScore();
+		scoreText.setString("Score: " + std::to_string(score));
 
 
 	// end update
@@ -63,6 +79,8 @@ int main()
 
 		//draw everything
 		victim.Draw(gameWindow);
+		gameWindow.draw(scoreText);
+		
 		
 		// display the contents to screen
 		gameWindow.display();
