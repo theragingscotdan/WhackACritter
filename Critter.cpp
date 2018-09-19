@@ -1,4 +1,9 @@
 // ---------- INCLUDES ------------------
+// library includes
+
+#include <cstdlib>
+
+
 // project includes
 #include "Critter.h"
 // ----------------------------------------
@@ -10,7 +15,8 @@ Critter::Critter()
 	// set up the sprite
 	m_texture.loadFromFile("graphics/frog.png");
 	m_sprite.setTexture(m_texture);
-	m_sprite.setPosition(300, 300);
+	m_sprite.setPosition(rand() % sf::VideoMode::getDesktopMode().width,
+		rand() % sf::VideoMode::getDesktopMode().height);
 }
 
 void Critter::Draw(sf::RenderTarget& _target)

@@ -1,5 +1,9 @@
 // ---------- INCLUDES -------------------
 #include <SFML/Graphics.hpp>
+#include <cstdlib>  // gives access to library func
+#include <ctime>    // gives access to time func
+
+
 #include "Critter.h"  // project includes
 // ----------------------------------------
 
@@ -13,6 +17,9 @@ int main()
 
 
 	sf::Clock gameClock;
+
+	// seed our random number generator
+	srand(time(NULL));
 
 	// create an instance of our Critter class
 	Critter victim;
