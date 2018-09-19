@@ -1,8 +1,9 @@
-// ---------- INCLUDES ------------------
-
+// ---------- INCLUDES -------------------
+#include <SFML/Graphics.hpp>
+#include "Critter.h"  // project includes
 // ----------------------------------------
 
-#include <SFML/Graphics.hpp>
+
 int main()
 {
 	// ------- game setup--------------------
@@ -12,6 +13,9 @@ int main()
 
 
 	sf::Clock gameClock;
+
+	// create an instance of our Critter class
+	Critter victim;
 
 
 	// ----- game setup end ----------------
@@ -41,13 +45,18 @@ int main()
 	// end update
 
 
-	// draw
+	// ------------ draw --------------
 
 	// clear to a single colour
 
 		gameWindow.clear();
+
+		//draw everything
+		victim.Draw(gameWindow);
 		
+		// display the contents to screen
 		gameWindow.display();
+
 
 	// ----- end draw ----
 	} // end of game while loop
