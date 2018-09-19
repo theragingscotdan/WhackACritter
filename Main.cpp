@@ -23,7 +23,14 @@ int main()
 	srand(time(NULL));
 
 	// create an instance of our Critter class
-	Critter victim;
+	const int NUM_CRITTERS = 5;
+	Critter victims[NUM_CRITTERS];
+	victims[0].Setup("graphics/frog.png", 10000);
+	victims[1].Setup("graphics/pig.png", 100);
+	victims[2].Setup("graphics/crocodile.png", 5000);
+	victims[3].Setup("graphics/bear.png", 300);
+	victims[4].Setup("graphics/rhino.png", 1000);
+
 
 	// game font
 	sf::Font gameFont;
@@ -51,7 +58,11 @@ int main()
 		while (gameWindow.pollEvent(event))
 		{
 			// process input on critters
-			victim.Input(event);
+		
+			for (int i = 0; i < NUM_CRITTERS; ++i)
+			{
+				victims[i].Input(event);
+			}
 
 			if (event.type == sf::Event::Closed)
 				gameWindow.close();
@@ -63,8 +74,12 @@ int main()
 		// ------------ update ---------------
 
 		sf::Time fameTime = gameClock.restart();
-		score += victim.GetPendingScore();
-		victim.ClearPendingScore();
+		for (int i = 0; i < NUM_CRITTERS; ++i)
+		{
+			score += victims[i].GetPendingScore();
+			victims[i].ClearPendingScore();
+		}
+		
 		scoreText.setString("Score: " + std::to_string(score));
 
 
@@ -78,7 +93,12 @@ int main()
 		gameWindow.clear();
 
 		//draw everything
-		victim.Draw(gameWindow);
+		
+		for (int i = 0; i < NUM_CRITTERS; ++i)
+		{
+			victims[i].Draw(gameWindow);
+		}
+		
 		gameWindow.draw(scoreText);
 		
 		
